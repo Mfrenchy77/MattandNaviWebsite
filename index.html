@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matt & Navarro | Road to Spain</title>
+    <meta name="description"
+        content="Support Matt French and Navarro as they represent Team USA in Working Equitation at the WAWE World Championship in Spain." />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;700&family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;500;700;800&display=swap");
+
+        :root {
+            --bg: #050505;
+            --text: #f4f1ea;
+            --muted: rgba(244, 241, 234, 0.68);
+            --line: rgba(244, 241, 234, 0.14);
+            --button-bg: #f4f1ea;
+            --button-text: #111111;
+            --max-width: 1360px;
+            --content-width: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.45;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            padding-left: 24px;
+            padding-right: 24px;
+            width: min(var(--max-width), calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 40;
+            background: rgba(5, 5, 5, 0.52);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav {
+            min-height: 76px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .nav-right {
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            color: var(--muted);
+            transition: color 0.18s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .brand {
+            justify-self: center;
+            font-size: 0.98rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 0 18px;
+            border-radius: 999px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            font-weight: 800;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            padding-top: 76px;
+            display: flex;
+            align-items: stretch;
+            overflow: hidden;
+        }
+
+        .hero-media {
+            position: absolute;
+            inset: 0;
+            background-image: url("./images/Piroette.png");
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.55;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 860px) 1fr;
+            align-items: end;
+        }
+
+        .hero-copy {
+            min-height: calc(100vh - 76px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: clamp(42px, 8vw, 96px) 0 54px;
+        }
+
+        .hero-topline {
+            text-align: center;
+            display: inline-block;
+            width: fit-content;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .hero-title {
+            padding: 50px 0 0;
+            margin: 22px 0 0;
+            font-family: "Cinzel Decorative", serif;
+            font-weight: 400;
+            font-size: clamp(4rem, 11vw, 9.5rem);
+            line-height: 0.9;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            max-width: 8.5ch;
+        }
+
+        .hero-subtitle {
+            margin: 24px 0 0;
+            max-width: 38rem;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 20px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            font-weight: 800;
+            transition: transform 0.18s ease, background 0.18s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            background: var(--button-bg);
+            color: var(--button-text);
+            border-color: transparent;
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--text);
+        }
+
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 34px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            width: min(760px, 100%);
+        }
+
+        .meta-label {
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .section {
+            border-top: 1px solid var(--line);
+            padding: 72px 0;
+        }
+
+        .section-inner {
+            width: min(var(--content-width), 100%);
+            margin: 0 auto;
+        }
+
+        .section-head {
+            display: grid;
+            grid-template-columns: minmax(0, 520px) 1fr;
+            gap: 28px;
+            align-items: start;
+            margin-bottom: 32px;
+        }
+
+        .section-label {
+            margin-bottom: 12px;
+            color: var(--muted);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: clamp(2.2rem, 4vw, 4.2rem);
+            line-height: 0.96;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+
+        .section-intro {
+            margin: 0;
+            max-width: 38rem;
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .story-grid,
+        .support-grid,
+        .contact-grid,
+        .budget-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 26px;
+        }
+
+        .copy p,
+        .copy li,
+        .support-note,
+        .contact-copy,
+        .footer-note,
+        .list-note {
+            color: var(--muted);
+        }
+
+        .copy p {
+            margin: 0 0 16px;
+            max-width: 44rem;
+        }
+
+        .quote-block {
+            min-height: 420px;
+            position: relative;
+            background:
+                linear-gradient(180deg, rgba(5, 5, 5, 0.06), rgba(5, 5, 5, 0.82)),
+                url("images/Pirouette.jpg") center 25% / cover no-repeat;
+            border: 1px solid var(--line);
+            overflow: hidden;
+        }
+
+        .quote-copy {
+            position: absolute;
+            left: 26px;
+            right: 26px;
+            bottom: 26px;
+        }
+
+        .quote-copy strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: clamp(1.6rem, 3vw, 2.7rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+
+        .budget-list,
+        .simple-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .budget-item,
+        .simple-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            padding: 16px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .budget-item:first-child,
+        .simple-item:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .budget-item strong,
+        .simple-item strong {
+            display: block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-size: 0.96rem;
+            letter-spacing: 0.01em;
+        }
+
+        .budget-amount {
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .progress-wrap {
+            padding-top: 2px;
+        }
+
+        .progress-amount {
+            margin: 0;
+            font-size: clamp(3rem, 6vw, 5.2rem);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            text-transform: uppercase;
+        }
+
+        .progress-caption {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 14px;
+            margin: 24px 0 12px;
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #f4f1ea, #ceb897);
+            transition: width 0.6s ease;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .checklist {
+            margin: 0;
+            padding-left: 18px;
+            display: grid;
+            gap: 12px;
+            color: var(--muted);
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 28px 0 38px;
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        /* =========================
+   TABLET / SMALL LAPTOP
+   ========================= */
+        @media (max-width: 1100px) {
+            .container {
+                width: 100%;
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .hero-inner,
+            .section-head,
+            .story-grid,
+            .support-grid,
+            .contact-grid,
+            .budget-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy {
+                min-height: auto;
+            }
+        }
+
+        /* =========================
+   MOBILE / TABLET NAV + HERO
+   ========================= */
+        @media (max-width: 900px) {
+            .container {
+                width: 100%;
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .section-inner {
+                width: 100%;
+            }
+
+            .nav {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-areas:
+                    "brand donate"
+                    "links links";
+                align-items: center;
+                gap: 14px 18px;
+                min-height: auto;
+                padding: 18px 0;
+            }
+
+            .brand {
+                grid-area: brand;
+                justify-self: start;
+                align-self: center;
+                order: unset;
+            }
+
+            .nav-left {
+                grid-area: links;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 20px;
+                width: 100%;
+            }
+
+            .nav-right {
+                grid-area: donate;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                width: auto;
+                gap: 12px;
+            }
+
+            .nav-right .nav-link {
+                display: none;
+            }
+
+            .nav-cta {
+                min-height: 40px;
+                padding: 0 16px;
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy {
+
+                min-height: auto;
+                padding: 40px 12px 40px;
+            }
+
+            .hero-title {
+                font-size: clamp(3.2rem, 16vw, 5.8rem);
+                max-width: 6ch;
+                line-height: 0.95;
+            }
+
+            .hero-subtitle {
+                max-width: 24rem;
+                font-size: 1rem;
+            }
+
+            .hero-meta {
+                grid-template-columns: 1fr;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .hero-media {
+                opacity: 0.35;
+            }
+
+            .section-title {
+                max-width: 9ch;
+            }
+        }
+
+        /* =========================
+   SMALL PHONE
+   ========================= */
+        @media (max-width: 760px) {
+            .container {
+                width: 100%;
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .hero-title {
+                font-size: clamp(3.1rem, 17vw, 5.2rem);
+                max-width: none;
+            }
+
+            .budget-item,
+            .simple-item {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 58px 0;
+            }
+
+            .footer-row {
+                flex-direction: column;
+                align-items: start;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const campaign = {
+            pageTitle: "Matt & Navarro | Road to Spain",
+            statusBadge: "Team USA • WAWE World Championship • Spain 2026",
+            headlineLines: ["Matt", "&", "Navarro", "to Spain"],
+            subtitle: "Matt French and Navarro have been selected to represent Team USA at the WAWE World Championship in Spain. Donations help cover horse transport, international travel, required paperwork, and competition expenses.",
+            goalAmount: 100000,
+            amountRaised: 0,
+            gofundmeUrl: "#",
+            venmoUrl: "#",
+            sponsorEmail: "mfrenchy77@gmail.com",
+            sponsorshipPhone: "619-408-8954",
+            storyIntro: "Matt French is a San Diego-based horse trainer and Masters-level Working Equitation competitor known for blending thoughtful horsemanship, clear communication, and strong fundamentals. Representing Team USA in Spain is the result of years of work, competition, and partnership.",
+            storyBody: "This campaign helps cover the real cost of taking a horse-and-rider team to the world stage. International equestrian competition requires major resources, especially when horse transport, travel, paperwork, and on-site care are all part of the trip.",
+            storyNavarro: "Navarro is more than a competition horse. He is Matt’s partner, teammate, and a huge part of the journey that made this opportunity possible. Every contribution helps this partnership make the trip to Spain and represent the United States.",
+            budgetItems: [
+                {
+                    title: "Horse shipping and international transport",
+                    description: "Air transport, freight handling, customs coordination, and horse travel logistics.",
+                    amount: "$40,000"
+                },
+                {
+                    title: "Vet paperwork, testing, permits, quarantine",
+                    description: "Required health documents, testing, import-export paperwork, and quarantine-related costs.",
+                    amount: "$10,000"
+                },
+                {
+                    title: "Rider and support travel",
+                    description: "Flights, baggage, airport transfers, and essential support travel.",
+                    amount: "$12,000"
+                },
+                {
+                    title: "Lodging, local transportation, meals",
+                    description: "Hotel stays, rental vehicle or local travel, and day-to-day expenses in Spain.",
+                    amount: "$10,000"
+                },
+                {
+                    title: "Competition and horse-care expenses",
+                    description: "Entry fee, bedding, feed, supplies, and event-related costs.",
+                    amount: "$8,000"
+                },
+                {
+                    title: "Preparation and contingency reserve",
+                    description: "Training prep, equipment, unexpected logistics changes, and emergency cushion.",
+                    amount: "$20,000"
+                }
+            ],
+            sponsors: [
+                {
+                    name: "Founding sponsor spot",
+                    detail: "Logo placement available"
+                },
+                {
+                    name: "Supporting sponsor spot",
+                    detail: "Business recognition available"
+                },
+                {
+                    name: "Community sponsor spot",
+                    detail: "Name recognition available"
+                }
+            ],
+            givingTiers: [
+                {
+                    name: "Fuel the trip",
+                    detail: "$50+ • Helps cover daily travel expenses"
+                },
+                {
+                    name: "Back the team",
+                    detail: "$250+ • Helps with competition costs"
+                },
+                {
+                    name: "Sponsor the journey",
+                    detail: "$1,000+ • Recognition on the site"
+                },
+                {
+                    name: "Premier sponsor",
+                    detail: "$5,000+ • Great fit for businesses"
+                }
+            ]
+        };
+    </script>
+
+    <header class="site-header">
+        <div class="container nav">
+            <div class="nav-left">
+                <a class="nav-link" href="#story">Story</a>
+                <a class="nav-link" href="#budget">Budget</a>
+                <a class="nav-link" href="#support">Support</a>
+            </div>
+
+            <div class="brand">Matt & Navarro</div>
+
+            <div class="nav-right">
+                <a class="nav-link" href="#contact">Contact</a>
+                <a class="nav-cta" href="#donate">Donate</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-media"></div>
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <div class="hero-topline" id="statusBadge"></div>
+                    <h1 class="hero-title" id="heroTitle"></h1>
+                    <p class="hero-subtitle" id="heroSubtitle"></p>
+
+                    <div class="hero-actions" id="donate">
+                        <a class="button button-primary" id="gofundmeButton" href="#" target="_blank"
+                            rel="noreferrer">Donate on GoFundMe</a>
+                        <a class="button button-secondary" id="venmoButton" href="#" target="_blank"
+                            rel="noreferrer">Contribute on Venmo</a>
+                    </div>
+
+                    <div class="hero-meta">
+                        <div>
+                            <div class="meta-label">Campaign</div>
+                            <div class="meta-value">Official fundraising campaign</div>
+                        </div>
+                        <div>
+                            <div class="meta-label">Goal</div>
+                            <div class="meta-value" id="heroGoal">$100,000 fundraising goal</div>
+                        </div>
+                        <div>
+                            <div class="meta-label">Purpose</div>
+                            <div class="meta-value">Support Team USA on the road to Spain</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="story">
+            <div class="container section-inner">
+                <div class="section-head">
+                    <div>
+                        <div class="section-label">The story</div>
+                        <h2 class="section-title">One horse. One rider. One shot at Spain.</h2>
+                    </div>
+                    <p class="section-intro">Matt French and Navarro are heading to Spain to represent Team USA in
+                        Working Equitation. This campaign helps make that trip possible.</p>
+                </div>
+
+                <div class="story-grid">
+                    <div class="copy">
+                        <p id="storyIntro"></p>
+                        <p id="storyBody"></p>
+                        <p id="storyNavarro"></p>
+                    </div>
+
+                    <div class="quote-block">
+                        <div class="quote-copy">
+                            <strong>Representing Team USA takes a village.</strong>
+                            <div class="support-note">Every donation, share, and sponsorship helps Matt and Navarro make
+                                the trip to Spain and compete on the world stage.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="budget">
+            <div class="container section-inner">
+                <div class="section-head">
+                    <div>
+                        <div class="section-label">Budget</div>
+                        <h2 class="section-title">A transparent $100,000 campaign.</h2>
+                    </div>
+                    <p class="section-intro">The goal is intentionally built on the high side so the campaign covers the
+                        real cost of traveling, competing, and moving a horse internationally without cutting corners.
+                    </p>
+                </div>
+
+                <div class="budget-grid">
+                    <div>
+                        <ul class="budget-list" id="budgetList"></ul>
+                    </div>
+
+                    <div class="progress-wrap">
+                        <p class="progress-amount" id="amountRaised">$0</p>
+                        <div class="progress-caption" id="goalAmountText">Raised toward $100,000 goal</div>
+                        <div class="progress-bar" aria-label="Fundraising progress">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="list-note" id="progressPercent">0% funded</div>
+                        <div class="list-note">Update this number manually to reflect both GoFundMe and any direct
+                            contributions you want counted publicly.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="support">
+            <div class="container section-inner">
+                <div class="section-head">
+                    <div>
+                        <div class="section-label">Support</div>
+                        <h2 class="section-title">Sponsors and giving levels.</h2>
+                    </div>
+                    <p class="section-intro">Supporters can give directly, sponsor the campaign, or help by sharing the
+                        story with people and businesses who want to back the trip.</p>
+                </div>
+
+                <div class="support-grid">
+                    <div>
+                        <ul class="simple-list" id="sponsorList"></ul>
+                    </div>
+                    <div>
+                        <ul class="simple-list" id="tierList"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="container section-inner">
+                <div class="section-head">
+                    <div>
+                        <div class="section-label">Contact</div>
+                        <h2 class="section-title">Sponsorships and larger support.</h2>
+                    </div>
+                    <p class="section-intro">For sponsorships, media inquiries, or larger contributions, reach out
+                        directly using the contact options below.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div>
+                        <div class="contact-copy">Use the buttons below for sponsor inquiries, media requests, or direct
+                            support conversations.</div>
+                        <div class="contact-actions">
+                            <a class="button button-primary" id="emailLink" href="#">Email Matt</a>
+                            <a class="button button-secondary" id="phoneLink" href="#">Text Matt</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <ol class="checklist">
+                            <li>Donate through GoFundMe or Venmo</li>
+                            <li>Share the campaign with friends, clients, and horse lovers</li>
+                            <li>Connect Matt with businesses interested in sponsorship</li>
+                            <li>Help spread the word about Team USA’s trip to Spain</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-row">
+            <div>Matt & Navarro • Road to Spain</div>
+            <div class="footer-note">© <span id="year"></span> Matt French</div>
+        </div>
+    </footer>
+
+    <script>
+        const currency = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0
+        });
+
+        function renderCampaign() {
+            document.title = campaign.pageTitle;
+            document.getElementById("statusBadge").textContent = campaign.statusBadge;
+            document.getElementById("heroTitle").innerHTML = campaign.headlineLines.join("<br>");
+            document.getElementById("heroSubtitle").textContent = campaign.subtitle;
+            document.getElementById("heroGoal").textContent = currency.format(campaign.goalAmount) + " fundraising goal";
+            document.getElementById("storyIntro").textContent = campaign.storyIntro;
+            document.getElementById("storyBody").textContent = campaign.storyBody;
+            document.getElementById("storyNavarro").textContent = campaign.storyNavarro;
+
+            document.getElementById("gofundmeButton").href = campaign.gofundmeUrl;
+            document.getElementById("venmoButton").href = campaign.venmoUrl;
+
+            document.getElementById("amountRaised").textContent = currency.format(campaign.amountRaised);
+            document.getElementById("goalAmountText").textContent = "Raised toward " + currency.format(campaign.goalAmount) + " goal";
+
+            const pct = campaign.goalAmount > 0 ? Math.min((campaign.amountRaised / campaign.goalAmount) * 100, 100) : 0;
+            document.getElementById("progressFill").style.width = pct + "%";
+            document.getElementById("progressPercent").textContent = Math.round(pct) + "% funded";
+
+            document.getElementById("budgetList").innerHTML = campaign.budgetItems.map(function (item) {
+                return '<li class="budget-item"><div><strong>' + item.title + '</strong><div class="list-note">' + item.description + '</div></div><div class="budget-amount">' + item.amount + '</div></li>';
+            }).join("");
+
+            document.getElementById("sponsorList").innerHTML = campaign.sponsors.map(function (item) {
+                return '<li class="simple-item"><div><strong>' + item.name + '</strong><div class="list-note">' + item.detail + '</div></div></li>';
+            }).join("");
+
+            document.getElementById("tierList").innerHTML = campaign.givingTiers.map(function (item) {
+                return '<li class="simple-item"><div><strong>' + item.name + '</strong><div class="list-note">' + item.detail + '</div></div></li>';
+            }).join("");
+
+            const emailLink = document.getElementById("emailLink");
+            emailLink.href = "mailto:" + campaign.sponsorEmail;
+            emailLink.textContent = campaign.sponsorEmail;
+
+            const cleanPhone = campaign.sponsorshipPhone.replace(/[^0-9]/g, "");
+            const phoneLink = document.getElementById("phoneLink");
+            phoneLink.href = "sms:" + cleanPhone;
+            phoneLink.textContent = campaign.sponsorshipPhone;
+
+            document.getElementById("year").textContent = new Date().getFullYear();
+        }
+
+        renderCampaign();
+    </script>
+</body>
+
+</html>
