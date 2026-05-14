@@ -358,18 +358,21 @@ https://www.mattandnavarro.com/
         .quote-block {
             min-height: 420px;
             position: relative;
-            background:
-                linear-gradient(180deg, rgba(5, 5, 5, 0.06), rgba(5, 5, 5, 0.82)),
-                url("images/Pirouette.jpg") center 25% / cover no-repeat;
+            display: flex;
+            align-items: flex-end;
             border: 1px solid var(--line);
             overflow: hidden;
+            background:
+                linear-gradient(180deg,
+                    rgba(5, 5, 5, 0.18) 0%,
+                    rgba(5, 5, 5, 0.58) 55%,
+                    rgba(5, 5, 5, 0.92) 100%),
+                url("./images/Piroette.png") center center / cover no-repeat;
         }
 
         .quote-copy {
-            position: absolute;
-            left: 26px;
-            right: 26px;
-            bottom: 26px;
+            width: 100%;
+            padding: 32px;
         }
 
         .quote-copy strong {
@@ -379,6 +382,20 @@ https://www.mattandnavarro.com/
             line-height: 0.95;
             letter-spacing: -0.04em;
             text-transform: uppercase;
+        }
+
+        .quote-list {
+            margin: 22px 0 0;
+            padding: 18px 0 0;
+            list-style: none;
+            border-top: 1px solid var(--line);
+            display: grid;
+            gap: 10px;
+        }
+
+        .quote-list li {
+            color: var(--muted);
+            font-size: 0.95rem;
         }
 
         .budget-list,
@@ -868,7 +885,7 @@ They are now raising support to help cover the very real costs of international 
 
 
 
-                        
+
                         <div class="progress-caption" id="goalAmountText">Raised toward $50,000 goal</div>
                         <div class="progress-bar" aria-label="Fundraising progress">
                             <div class="progress-fill" id="progressFill"></div>
