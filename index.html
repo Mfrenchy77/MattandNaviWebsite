@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-https://www.mattandnavarro.com/
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Matt & Navarro | Road to Spain</title>
+
     <meta name="description"
         content="Support Matt French and Navarro as they represent Team USA in Working Equitation at the WAWE World Championship in Spain." />
+
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;700&family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;500;700;800&display=swap");
+
+        /* =========================
+           BASIC TEXT HELPERS
+           ========================= */
 
         #storyIntro,
         #storyBody,
         #storyNavarro {
             white-space: pre-line;
         }
+
+        /* =========================
+           SITE-WIDE VARIABLES
+           ========================= */
 
         :root {
             --bg: #050505;
@@ -60,6 +70,10 @@ https://www.mattandnavarro.com/
             width: min(var(--max-width), calc(100% - 32px));
             margin: 0 auto;
         }
+
+        /* =========================
+           FIXED NAVIGATION
+           ========================= */
 
         .site-header {
             position: fixed;
@@ -123,6 +137,10 @@ https://www.mattandnavarro.com/
             color: var(--button-text);
             font-weight: 800;
         }
+
+        /* =========================
+           HERO SECTION
+           ========================= */
 
         .hero {
             position: relative;
@@ -201,6 +219,33 @@ https://www.mattandnavarro.com/
             margin-top: 28px;
         }
 
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 20px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            font-weight: 800;
+            transition: transform 0.18s ease, background 0.18s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            background: var(--button-bg);
+            color: var(--button-text);
+            border-color: transparent;
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--text);
+        }
+
         .social-links {
             display: flex;
             flex-wrap: wrap;
@@ -233,39 +278,6 @@ https://www.mattandnavarro.com/
             fill: currentColor;
         }
 
-        .footer-socials {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 52px;
-            padding: 0 20px;
-            border-radius: 999px;
-            border: 1px solid var(--line);
-            font-weight: 800;
-            transition: transform 0.18s ease, background 0.18s ease;
-        }
-
-        .button:hover {
-            transform: translateY(-1px);
-        }
-
-        .button-primary {
-            background: var(--button-bg);
-            color: var(--button-text);
-            border-color: transparent;
-        }
-
-        .button-secondary {
-            background: transparent;
-            color: var(--text);
-        }
-
         .hero-meta {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -289,6 +301,10 @@ https://www.mattandnavarro.com/
             font-size: 1rem;
             font-weight: 700;
         }
+
+        /* =========================
+           GENERAL SECTIONS
+           ========================= */
 
         .section {
             border-top: 1px solid var(--line);
@@ -355,19 +371,19 @@ https://www.mattandnavarro.com/
             max-width: 44rem;
         }
 
+        /* =========================
+           STORY QUOTE / MISSION CARD
+           ========================= */
+
         .quote-block {
             min-height: 420px;
-            position: relative;
             display: flex;
             align-items: flex-end;
             border: 1px solid var(--line);
             overflow: hidden;
             background:
-                linear-gradient(180deg,
-                    rgba(5, 5, 5, 0.18) 0%,
-                    rgba(5, 5, 5, 0.58) 55%,
-                    rgba(5, 5, 5, 0.92) 100%),
-                url("./images/Jumping.png") center center / cover no-repeat;
+                radial-gradient(circle at top right, rgba(244, 241, 234, 0.08), transparent 34%),
+                linear-gradient(180deg, rgba(5, 5, 5, 0.18) 0%, rgba(5, 5, 5, 0.78) 100%);
         }
 
         .quote-copy {
@@ -397,6 +413,10 @@ https://www.mattandnavarro.com/
             color: var(--muted);
             font-size: 0.95rem;
         }
+
+        /* =========================
+           BUDGET + PROGRESS
+           ========================= */
 
         .budget-list,
         .simple-list {
@@ -468,6 +488,62 @@ https://www.mattandnavarro.com/
             transition: width 0.6s ease;
         }
 
+        /* =========================
+           DONATION WALL
+           =========================
+           This is the public list of donations.
+
+           It only shows:
+           - Date
+           - Name
+           - Amount
+
+           To add, remove, or edit donations, change the campaign.donations
+           list near the top of the body.
+        */
+
+        .donation-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .donation-item {
+            display: grid;
+            grid-template-columns: 110px minmax(0, 1fr) auto;
+            gap: 16px;
+            align-items: baseline;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .donation-item-featured {
+            padding: 16px;
+            margin: 10px 0;
+            border: 1px solid rgba(244, 241, 234, 0.28);
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .donation-date {
+            color: var(--muted);
+            font-size: 0.86rem;
+            white-space: nowrap;
+        }
+
+        .donation-name {
+            font-weight: 800;
+        }
+
+        .donation-amount {
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        /* =========================
+           CONTACT + FOOTER
+           ========================= */
+
         .contact-actions {
             display: flex;
             flex-wrap: wrap;
@@ -497,9 +573,16 @@ https://www.mattandnavarro.com/
             color: var(--muted);
         }
 
+        .footer-socials {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         /* =========================
-   TABLET / SMALL LAPTOP
-   ========================= */
+           TABLET / SMALL LAPTOP
+           ========================= */
+
         @media (max-width: 1100px) {
             .container {
                 width: 100%;
@@ -522,8 +605,9 @@ https://www.mattandnavarro.com/
         }
 
         /* =========================
-   MOBILE / TABLET NAV + HERO
-   ========================= */
+           MOBILE / TABLET NAV + HERO
+           ========================= */
+
         @media (max-width: 900px) {
             .container {
                 width: 100%;
@@ -590,7 +674,6 @@ https://www.mattandnavarro.com/
             }
 
             .hero-copy {
-
                 min-height: auto;
                 padding: 40px 12px 40px;
             }
@@ -622,8 +705,9 @@ https://www.mattandnavarro.com/
         }
 
         /* =========================
-   SMALL PHONE
-   ========================= */
+           SMALL PHONE
+           ========================= */
+
         @media (max-width: 760px) {
             .container {
                 width: 100%;
@@ -641,6 +725,15 @@ https://www.mattandnavarro.com/
                 grid-template-columns: 1fr;
             }
 
+            .donation-item {
+                grid-template-columns: 1fr auto;
+                gap: 6px 14px;
+            }
+
+            .donation-date {
+                grid-column: 1 / -1;
+            }
+
             .section {
                 padding: 58px 0;
             }
@@ -649,36 +742,81 @@ https://www.mattandnavarro.com/
                 flex-direction: column;
                 align-items: start;
             }
-
         }
     </style>
 </head>
 
 <body>
     <script>
+        /*
+            =========================
+            CAMPAIGN DATA
+            =========================
+
+            This is the main section you update.
+
+            To update the fundraising total:
+            - Do NOT manually change the progress bar.
+            - Do NOT manually change the amount raised in the HTML.
+            - Add or edit donation lines inside campaign.donations.
+            - The website calculates the total automatically.
+
+            Donation format:
+            { date: "YYYY-MM-DD", name: "Donor Name", amount: 100 }
+
+            Keep dates in YYYY-MM-DD format because they sort cleanly.
+        */
+
         const campaign = {
             pageTitle: "Matt & Navarro | Road to Spain",
             statusBadge: "Team USA • WAWE World Championship • Spain 2026",
             headlineLines: ["Matt", "&", "Navarro", "to Spain"],
             subtitle: "Matt French and Navarro have been selected to represent Team USA at the WAWE World Championship in Spain. Donations help cover horse transport, international travel, required paperwork, and competition expenses.",
+
             goalAmount: 50000,
 
-
-            /* Change this when updating Sponsors */
-            amountRaised: 0.05,
-
-
+            donations: [
+                { date: "2026-05-14", name: "Janai Brown", amount: 100 },
+                { date: "2026-05-14", name: "Thomas Marshall", amount: 100 },
+                { date: "2026-05-14", name: "Patricia Rainville", amount: 200 },
+                { date: "2026-05-14", name: "Cassidy Cooper", amount: 30 },
+                { date: "2026-05-14", name: "Ann Alfama", amount: 100 },
+                { date: "2026-05-14", name: "Cathy Nelson", amount: 75 },
+                { date: "2026-05-14", name: "Raquel Potts", amount: 50 },
+                { date: "2026-05-14", name: "Alexa Maine", amount: 100 },
+                { date: "2026-05-14", name: "Debbie Simons", amount: 1000 },
+                { date: "2026-05-14", name: "Kathy Cheney", amount: 100 },
+                { date: "2026-05-14", name: "Debbie Johnson", amount: 100 },
+                { date: "2026-05-14", name: "Diane Granander", amount: 1000 },
+                { date: "2026-05-14", name: "Simone Aguilar", amount: 150 },
+                { date: "2026-05-14", name: "Scott Farrell", amount: 1000 },
+                { date: "2026-05-14", name: "Jennifer Pittsley", amount: 100 },
+                { date: "2026-05-14", name: "Jesus Vazquez", amount: 100 },
+                { date: "2026-05-14", name: "Cheryl Quast", amount: 100 },
+                { date: "2026-05-14", name: "Steve Hill", amount: 300 },
+                { date: "2026-05-14", name: "Lisa Andregg", amount: 50 },
+                { date: "2026-05-15", name: "Christina Hull", amount: 15 }
+            ],
 
             gofundmeUrl: "https://gofund.me/c61f4be72",
             venmoUrl: "https://venmo.com/Frenchy77",
+            facebookUrl: "https://www.facebook.com/MFrenchy",
+            instagramUrl: "https://www.instagram.com/matt_and_navi/",
+            youtubeUrl: "https://www.youtube.com/@MFrenchy77",
+
             sponsorEmail: "mfrenchy77@gmail.com",
             sponsorshipPhone: "619-408-8954",
+
             storyIntro: `Matt French and Navarro have been selected to represent the United States at the 2026 Working Equitation World Championship in Jerez, Spain, where the first U.S. team ever will step onto the world stage.
 
 Matt is a San Diego-based horse trainer and Masters-level competitor. Navarro, a rescued reservation mustang, is the horse he has developed through years of patience, trust, and hard-earned partnership. Together, they have risen from humble beginnings to become part of a historic moment for American Working Equitation.
 
 They are now raising support to help cover the very real costs of international competition, including horse transport, veterinary and quarantine requirements, stabling, rider travel, and on-the-ground logistics in Europe. Every contribution helps make this journey possible.`,
+
+            storyBody: "",
+
             storyNavarro: "Navarro is more than a competition horse. He is Matt’s partner, teammate, and a huge part of the journey that made this opportunity possible. Every contribution helps this partnership make the trip to Spain and represent the United States.",
+
             budgetItems: [
                 {
                     title: "Horse shipping and international transport",
@@ -711,24 +849,7 @@ They are now raising support to help cover the very real costs of international 
                     amount: "$3,000"
                 }
             ],
-            sponsors: [
-                {
-                    name: "Mark Andrus",
-                    detail: "$0.05"
-                },
-                {
-                    name: "Founding sponsor spot",
-                    detail: "Logo placement available"
-                },
-                {
-                    name: "Supporting sponsor spot",
-                    detail: "Business recognition available"
-                },
-                {
-                    name: "Community sponsor spot",
-                    detail: "Name recognition available"
-                }
-            ],
+
             givingTiers: [
                 {
                     name: "Fuel the trip",
@@ -770,6 +891,7 @@ They are now raising support to help cover the very real costs of international 
     <main>
         <section class="hero">
             <div class="hero-media"></div>
+
             <div class="container hero-inner">
                 <div class="hero-copy">
                     <div class="hero-topline" id="statusBadge"></div>
@@ -781,10 +903,10 @@ They are now raising support to help cover the very real costs of international 
                             rel="noreferrer">Contribute on Venmo</a>
                         <a class="button button-secondary" id="gofundmeButton" href="#" target="_blank"
                             rel="noreferrer">Donate on GoFundMe</a>
-
                     </div>
+
                     <div class="social-links" aria-label="Social media links">
-                        <a class="social-link" href="https://www.facebook.com/MFrenchy" target="_blank" rel="noreferrer"
+                        <a class="social-link" id="facebookLinkHero" href="#" target="_blank" rel="noreferrer"
                             aria-label="Follow Matt French on Facebook">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path
@@ -792,16 +914,16 @@ They are now raising support to help cover the very real costs of international 
                             </svg>
                         </a>
 
-                        <a class="social-link" href="https://www.instagram.com/matt_and_navi/" target="_blank"
-                            rel="noreferrer" aria-label="Follow Matt and Navarro on Instagram">
+                        <a class="social-link" id="instagramLinkHero" href="#" target="_blank" rel="noreferrer"
+                            aria-label="Follow Matt and Navarro on Instagram">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path
                                     d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z" />
                             </svg>
                         </a>
 
-                        <a class="social-link" href="https://www.youtube.com/@MFrenchy77" target="_blank"
-                            rel="noreferrer" aria-label="Subscribe to Matt French on YouTube">
+                        <a class="social-link" id="youtubeLinkHero" href="#" target="_blank" rel="noreferrer"
+                            aria-label="Subscribe to Matt French on YouTube">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path
                                     d="M21.58 7.19a2.73 2.73 0 0 0-1.92-1.93C17.96 4.8 12 4.8 12 4.8s-5.96 0-7.66.46a2.73 2.73 0 0 0-1.92 1.93A28.4 28.4 0 0 0 2 12a28.4 28.4 0 0 0 .42 4.81 2.73 2.73 0 0 0 1.92 1.93c1.7.46 7.66.46 7.66.46s5.96 0 7.66-.46a2.73 2.73 0 0 0 1.92-1.93A28.4 28.4 0 0 0 22 12a28.4 28.4 0 0 0-.42-4.81ZM10 15.3V8.7l5.75 3.3L10 15.3Z" />
@@ -832,10 +954,12 @@ They are now raising support to help cover the very real costs of international 
                 <div class="section-head">
                     <div>
                         <div class="section-label">The story</div>
-                        <h2 class="section-title">SELECTED FOR A HISTORIC FIRST</h2>
+                        <h2 class="section-title">Selected for a historic first</h2>
                     </div>
-                    <p class="section-intro">Matt French and Navarro are heading to Spain to represent Team USA in
-                        Working Equitation. This campaign helps make that trip possible.</p>
+                    <p class="section-intro">
+                        Matt French and Navarro are heading to Spain to represent Team USA in Working Equitation. This
+                        campaign helps make that trip possible.
+                    </p>
                 </div>
 
                 <div class="story-grid">
@@ -848,8 +972,16 @@ They are now raising support to help cover the very real costs of international 
                     <div class="quote-block">
                         <div class="quote-copy">
                             <strong>Representing Team USA takes a village.</strong>
-                            <div class="support-note">Every donation, share, and sponsorship helps Matt and Navarro make
-                                the trip to Spain and compete on the world stage.</div>
+                            <div class="support-note">
+                                Every donation, share, and sponsorship helps Matt and Navarro make the trip to Spain and
+                                compete on the world stage.
+                            </div>
+
+                            <ul class="quote-list">
+                                <li>First U.S. team to compete at the Working Equitation World Championship</li>
+                                <li>San Diego-based horse-and-rider team</li>
+                                <li>Supporting international transport, horse care, and travel logistics</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -863,9 +995,9 @@ They are now raising support to help cover the very real costs of international 
                         <div class="section-label">Budget</div>
                         <h2 class="section-title">A transparent $50,000 first goal.</h2>
                     </div>
-                    <p class="section-intro">This first fundraising goal is focused on the most immediate costs of
-                        getting
-                        Matt and Navarro to Spain safely, prepared, and ready to represent Team USA.
+                    <p class="section-intro">
+                        This first fundraising goal is focused on the most immediate costs of getting Matt and Navarro
+                        to Spain safely, prepared, and ready to represent Team USA.
                     </p>
                 </div>
 
@@ -875,29 +1007,17 @@ They are now raising support to help cover the very real costs of international 
                     </div>
 
                     <div class="progress-wrap">
-
-
-
-
-                        <!-- Change this when updating Sponsors -->
-                        <p class="progress-amount" id="amountRaised">$0.05</p>
-
-
-
-
+                        <!--
+                            This amount is filled in automatically from campaign.donations.
+                            Do not manually edit the dollar amount here.
+                        -->
+                        <p class="progress-amount" id="amountRaised">$0</p>
 
                         <div class="progress-caption" id="goalAmountText">Raised toward $50,000 goal</div>
                         <div class="progress-bar" aria-label="Fundraising progress">
                             <div class="progress-fill" id="progressFill"></div>
                         </div>
-
-
-                        <!-- Change this when adding Sponsors -->
-                        <div class="list-note" id="progressPercent">0.01% funded</div>
-
-
-
-
+                        <div class="list-note" id="progressPercent">0% funded</div>
                     </div>
                 </div>
             </div>
@@ -908,17 +1028,29 @@ They are now raising support to help cover the very real costs of international 
                 <div class="section-head">
                     <div>
                         <div class="section-label">Support</div>
-                        <h2 class="section-title">Sponsors and giving levels.</h2>
+                        <h2 class="section-title">Supporters making this possible.</h2>
                     </div>
-                    <p class="section-intro">Supporters can give directly, sponsor the campaign, or help by sharing the
-                        story with people and businesses who want to back the trip.</p>
+                    <p class="section-intro">
+                        Every donation, share, and sponsorship helps Matt and Navarro get one step closer to Spain.
+                        Thank you to the people helping make this possible.
+                    </p>
                 </div>
 
                 <div class="support-grid">
                     <div>
-                        <ul class="simple-list" id="sponsorList"></ul>
+                        <!--
+                            Public donation wall.
+                            This is filled automatically from campaign.donations.
+                            It shows only date, name, and amount.
+                        -->
+                        <ul class="donation-list" id="donationList"></ul>
                     </div>
+
                     <div>
+                        <!--
+                            Giving tiers stay separate from the public donation wall.
+                            These are general examples for future supporters.
+                        -->
                         <ul class="simple-list" id="tierList"></ul>
                     </div>
                 </div>
@@ -932,14 +1064,18 @@ They are now raising support to help cover the very real costs of international 
                         <div class="section-label">Contact</div>
                         <h2 class="section-title">Sponsorships and larger support.</h2>
                     </div>
-                    <p class="section-intro">For sponsorships, media inquiries, or larger contributions, reach out
-                        directly using the contact options below.</p>
+                    <p class="section-intro">
+                        For sponsorships, media inquiries, or larger contributions, reach out directly using the contact
+                        options below.
+                    </p>
                 </div>
 
                 <div class="contact-grid">
                     <div>
-                        <div class="contact-copy">Use the buttons below for sponsor inquiries, media requests, or direct
-                            support conversations.</div>
+                        <div class="contact-copy">
+                            Use the buttons below for sponsor inquiries, media requests, or direct support
+                            conversations.
+                        </div>
                         <div class="contact-actions">
                             <a class="button button-primary" id="emailLink" href="#">Email Matt</a>
                             <a class="button button-secondary" id="phoneLink" href="#">Text Matt</a>
@@ -964,7 +1100,7 @@ They are now raising support to help cover the very real costs of international 
             <div>Matt & Navarro • Road to Spain</div>
 
             <div class="footer-socials" aria-label="Social media links">
-                <a class="social-link" href="https://www.facebook.com/MFrenchy" target="_blank" rel="noreferrer"
+                <a class="social-link" id="facebookLinkFooter" href="#" target="_blank" rel="noreferrer"
                     aria-label="Follow Matt French on Facebook">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path
@@ -972,7 +1108,7 @@ They are now raising support to help cover the very real costs of international 
                     </svg>
                 </a>
 
-                <a class="social-link" href="https://www.instagram.com/matt_and_navi/" target="_blank" rel="noreferrer"
+                <a class="social-link" id="instagramLinkFooter" href="#" target="_blank" rel="noreferrer"
                     aria-label="Follow Matt and Navarro on Instagram">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path
@@ -980,7 +1116,7 @@ They are now raising support to help cover the very real costs of international 
                     </svg>
                 </a>
 
-                <a class="social-link" href="https://www.youtube.com/@MFrenchy77" target="_blank" rel="noreferrer"
+                <a class="social-link" id="youtubeLinkFooter" href="#" target="_blank" rel="noreferrer"
                     aria-label="Subscribe to Matt French on YouTube">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path
@@ -994,42 +1130,177 @@ They are now raising support to help cover the very real costs of international 
     </footer>
 
     <script>
-        const currency = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 0
-        });
+        /*
+            =========================
+            WEBSITE RENDERING SCRIPT
+            =========================
+
+            This fills in the changing pieces of the page:
+            - page title
+            - hero text
+            - donation buttons
+            - social links
+            - budget list
+            - total raised
+            - progress bar
+            - public donation wall
+            - giving tiers
+            - contact links
+
+            Important:
+            The amount raised is calculated from campaign.donations.
+            You should not manually type the total raised anywhere else.
+        */
+
+        function formatCurrency(amount) {
+            /*
+                Shows whole-dollar amounts like:
+                $100
+
+                Also supports cents if needed:
+                $0.05
+            */
+            const hasCents = Math.round((amount % 1) * 100) !== 0;
+
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: hasCents ? 2 : 0,
+                maximumFractionDigits: hasCents ? 2 : 0
+            }).format(amount);
+        }
+
+        function formatDisplayDate(dateString) {
+            /*
+                campaign.donations uses YYYY-MM-DD.
+                This turns it into a display date like:
+                5/14/2026
+            */
+            const date = new Date(dateString + "T00:00:00");
+
+            return new Intl.DateTimeFormat("en-US", {
+                month: "numeric",
+                day: "numeric",
+                year: "numeric"
+            }).format(date);
+        }
+
+        function getTotalRaised() {
+            /*
+                Adds all donations together.
+
+                This replaces the old amountRaised field.
+                Add a new donation to campaign.donations and the site total updates.
+            */
+            return campaign.donations.reduce(function (total, donation) {
+                return total + donation.amount;
+            }, 0);
+        }
 
         function renderCampaign() {
+            const amountRaised = getTotalRaised();
+
             document.title = campaign.pageTitle;
+
             document.getElementById("statusBadge").textContent = campaign.statusBadge;
             document.getElementById("heroTitle").innerHTML = campaign.headlineLines.join("<br>");
             document.getElementById("heroSubtitle").textContent = campaign.subtitle;
-            document.getElementById("heroGoal").textContent = currency.format(campaign.goalAmount) + " fundraising goal";
+            document.getElementById("heroGoal").textContent = formatCurrency(campaign.goalAmount) + " fundraising goal";
+
             document.getElementById("storyIntro").textContent = campaign.storyIntro;
-            document.getElementById("storyBody").textContent = campaign.storyBody;
+            document.getElementById("storyBody").textContent = campaign.storyBody || "";
             document.getElementById("storyNavarro").textContent = campaign.storyNavarro;
 
             document.getElementById("gofundmeButton").href = campaign.gofundmeUrl;
             document.getElementById("venmoButton").href = campaign.venmoUrl;
 
-            document.getElementById("amountRaised").textContent = currency.format(campaign.amountRaised);
-            document.getElementById("goalAmountText").textContent = "Raised toward " + currency.format(campaign.goalAmount) + " goal";
+            document.getElementById("facebookLinkHero").href = campaign.facebookUrl;
+            document.getElementById("instagramLinkHero").href = campaign.instagramUrl;
+            document.getElementById("youtubeLinkHero").href = campaign.youtubeUrl;
 
-            const pct = campaign.goalAmount > 0 ? Math.min((campaign.amountRaised / campaign.goalAmount) * 100, 100) : 0;
-            document.getElementById("progressFill").style.width = pct + "%";
-            document.getElementById("progressPercent").textContent = Math.round(pct) + "% funded";
+            document.getElementById("facebookLinkFooter").href = campaign.facebookUrl;
+            document.getElementById("instagramLinkFooter").href = campaign.instagramUrl;
+            document.getElementById("youtubeLinkFooter").href = campaign.youtubeUrl;
 
+            /*
+                Progress display.
+
+                pct = true fundraising percentage.
+                visiblePct = gives the bar a tiny visible sliver once fundraising starts.
+            */
+            document.getElementById("amountRaised").textContent = formatCurrency(amountRaised);
+            document.getElementById("goalAmountText").textContent =
+                "Raised toward " + formatCurrency(campaign.goalAmount) + " goal";
+
+            const pct = campaign.goalAmount > 0
+                ? Math.min((amountRaised / campaign.goalAmount) * 100, 100)
+                : 0;
+
+            const visiblePct = amountRaised > 0 ? Math.max(pct, 1) : 0;
+
+            document.getElementById("progressFill").style.width = visiblePct + "%";
+            document.getElementById("progressPercent").textContent =
+                pct > 0 && pct < 1 ? "<1% funded" : Math.round(pct) + "% funded";
+
+            /*
+                Budget list.
+            */
             document.getElementById("budgetList").innerHTML = campaign.budgetItems.map(function (item) {
-                return '<li class="budget-item"><div><strong>' + item.title + '</strong><div class="list-note">' + item.description + '</div></div><div class="budget-amount">' + item.amount + '</div></li>';
+                return '<li class="budget-item"><div><strong>'
+                    + item.title
+                    + '</strong><div class="list-note">'
+                    + item.description
+                    + '</div></div><div class="budget-amount">'
+                    + item.amount
+                    + '</div></li>';
             }).join("");
 
-            document.getElementById("sponsorList").innerHTML = campaign.sponsors.map(function (item) {
-                return '<li class="simple-item"><div><strong>' + item.name + '</strong><div class="list-note">' + item.detail + '</div></div></li>';
+            /*
+                Public donation wall.
+
+                Shows only:
+                - date
+                - name
+                - amount
+
+                Current sort:
+                Highest donation first.
+
+                To sort newest donation first instead, replace:
+                return b.amount - a.amount;
+
+                with:
+                return new Date(b.date) - new Date(a.date);
+            */
+            const publicDonations = campaign.donations
+                .slice()
+                .sort(function (a, b) {
+                    return b.amount - a.amount;
+                });
+
+            document.getElementById("donationList").innerHTML = publicDonations.map(function (donation) {
+                const featuredClass = donation.amount >= 1000 ? " donation-item-featured" : "";
+
+                return '<li class="donation-item'
+                    + featuredClass
+                    + '"><div class="donation-date">'
+                    + formatDisplayDate(donation.date)
+                    + '</div><div class="donation-name">'
+                    + donation.name
+                    + '</div><div class="donation-amount">'
+                    + formatCurrency(donation.amount)
+                    + '</div></li>';
             }).join("");
 
+            /*
+                Giving tiers.
+            */
             document.getElementById("tierList").innerHTML = campaign.givingTiers.map(function (item) {
-                return '<li class="simple-item"><div><strong>' + item.name + '</strong><div class="list-note">' + item.detail + '</div></div></li>';
+                return '<li class="simple-item"><div><strong>'
+                    + item.name
+                    + '</strong><div class="list-note">'
+                    + item.detail
+                    + '</div></div></li>';
             }).join("");
 
             const emailLink = document.getElementById("emailLink");
