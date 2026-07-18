@@ -1280,6 +1280,87 @@ They are now raising support to help cover the very real costs of international 
             }).format(date);
         }
 
+        function normalizeDonorName(name, index) {
+            /*
+                This creates a hidden matching key for donor names.
+
+                It helps combine names that are probably the same person, like:
+                - Don & Julia Wendt
+                - Don and Julia Wendt
+
+                Anonymous donations are intentionally NOT combined because
+                multiple anonymous donations may be different people.
+            */
+            const cleanedName = name.trim().replace(/\s+/g, " ");
+            const lowerName = cleanedName.toLowerCase();
+
+            if (lowerName.startsWith("anonymous")) {
+                return "anonymous-" + index;
+            }
+
+            return lowerName
+                .replace(/&/g, " and ")
+                .replace(/[.,']/g, "")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function getGroupedDonations() {
+            /*
+                This keeps campaign.donations as the full donation history,
+                but groups matching donor names for the public donor wall.
+
+                The site total still uses every individual donation.
+            */
+            const groups = new Map();
+
+            campaign.donations.forEach(function (donation, index) {
+                const cleanedName = donation.name.trim().replace(/\s+/g, " ");
+                const key = normalizeDonorName(cleanedName, index);
+
+                if (!groups.has(key)) {
+                    groups.set(key, {
+                        name: cleanedName,
+                        amount: 0,
+                        dates: [],
+                        donationCount: 0
+                    });
+                }
+
+                const group = groups.get(key);
+                group.amount += donation.amount;
+                group.dates.push(donation.date);
+                group.donationCount += 1;
+            });
+
+            return Array.from(groups.values()).map(function (group) {
+                const uniqueDates = Array.from(new Set(group.dates)).sort();
+
+                return {
+                    name: group.name,
+                    amount: group.amount,
+                    dates: uniqueDates,
+                    donationCount: group.donationCount
+                };
+            });
+        }
+
+        function formatDonationDateSummary(dates) {
+            /*
+                If someone donated once, show that date.
+                If someone donated more than once, show the first date + how many more.
+            */
+            if (!dates || dates.length === 0) {
+                return "";
+            }
+
+            if (dates.length === 1) {
+                return formatDisplayDate(dates[0]);
+            }
+
+            return formatDisplayDate(dates[0]) + " + " + (dates.length - 1) + " more";
+        }
+
         function getTotalRaised() {
             /*
                 Adds all donations together.
@@ -1367,10 +1448,16 @@ They are now raising support to help cover the very real costs of international 
                 with:
                 return new Date(b.date) - new Date(a.date);
             */
-            const publicDonations = campaign.donations
-                .slice()
+            const publicDonations = getGroupedDonations()
                 .sort(function (a, b) {
-                    return b.amount - a.amount;
+                    if (b.amount !== a.amount) {
+                        return b.amount - a.amount;
+                    }
+
+                    const aLatestDate = a.dates[a.dates.length - 1];
+                    const bLatestDate = b.dates[b.dates.length - 1];
+
+                    return new Date(bLatestDate) - new Date(aLatestDate);
                 });
 
             document.getElementById("donationList").innerHTML = publicDonations.map(function (donation) {
@@ -1379,7 +1466,7 @@ They are now raising support to help cover the very real costs of international 
                 return '<li class="donation-item'
                     + featuredClass
                     + '"><div class="donation-date">'
-                    + formatDisplayDate(donation.date)
+                    + formatDonationDateSummary(donation.dates)
                     + '</div><div class="donation-name">'
                     + donation.name
                     + '</div><div class="donation-amount">'
