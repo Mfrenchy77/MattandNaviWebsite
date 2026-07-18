@@ -154,11 +154,14 @@
         .hero-media {
             position: absolute;
             inset: 0;
-            background-image: url("./images/Piroette.png");
+            background-image:
+                linear-gradient(90deg, rgba(5, 5, 5, 0.96) 0%, rgba(5, 5, 5, 0.72) 34%, rgba(5, 5, 5, 0.20) 70%, rgba(5, 5, 5, 0.74) 100%),
+                linear-gradient(180deg, rgba(5, 5, 5, 0.24) 0%, rgba(5, 5, 5, 0.88) 100%),
+                url("./images/Miel_Navi_Matt_Oregon.png");
             background-position: center center;
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
-            opacity: 0.55;
+            opacity: 1;
         }
 
         .hero-inner {
@@ -210,6 +213,97 @@
             max-width: 38rem;
             color: var(--muted);
             font-size: 1.08rem;
+        }
+
+        /* =========================
+           COUNTDOWN
+           ========================= */
+
+        .countdown-simple {
+            margin-top: 28px;
+            width: min(100%, 760px);
+            min-height: 120px;
+            padding: 22px 28px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.055);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            text-align: center;
+        }
+
+        .countdown-days {
+            display: block;
+            font-size: clamp(3.5rem, 8vw, 6.8rem);
+            line-height: 0.9;
+            font-weight: 800;
+            letter-spacing: -0.08em;
+        }
+
+        .countdown-text {
+            display: block;
+            color: var(--text);
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            line-height: 1.05;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            max-width: 16rem;
+            text-align: left;
+        }
+
+        .countdown-note {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .progress-wrap.hero-progress {
+            width: min(100%, 760px);
+            margin-top: 18px;
+            padding: 20px 28px 28px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.045);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-progress .progress-amount {
+            font-size: clamp(2.5rem, 5vw, 4.8rem);
+        }
+
+        .hero-progress-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: end;
+        }
+
+        .donor-count-display {
+            text-align: right;
+        }
+
+        .donor-count-number {
+            display: block;
+            font-size: clamp(2rem, 4vw, 4rem);
+            line-height: 0.95;
+            font-weight: 800;
+            letter-spacing: -0.06em;
+        }
+
+        .donor-count-label {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .budget-grid-single {
+            grid-template-columns: 1fr;
         }
 
         .hero-actions {
@@ -372,46 +466,96 @@
         }
 
         /* =========================
-           STORY QUOTE / MISSION CARD
-           ========================= */
+   STORY COMMUNITY CARD
+   ========================= */
 
         .quote-block {
-            min-height: 420px;
-            display: flex;
-            align-items: flex-end;
             border: 1px solid var(--line);
             overflow: hidden;
             background:
                 radial-gradient(circle at top right, rgba(244, 241, 234, 0.08), transparent 34%),
-                linear-gradient(180deg, rgba(5, 5, 5, 0.18) 0%, rgba(5, 5, 5, 0.78) 100%);
+                linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
         }
 
         .quote-copy {
             width: 100%;
-            padding: 32px;
+            padding: clamp(28px, 5vw, 56px);
+            text-align: center;
         }
 
         .quote-copy strong {
             display: block;
-            margin-bottom: 10px;
-            font-size: clamp(1.6rem, 3vw, 2.7rem);
+            margin: 0 auto 14px;
+            max-width: 24ch;
+            font-size: clamp(1.8rem, 3vw, 3rem);
             line-height: 0.95;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.05em;
             text-transform: uppercase;
         }
 
+        .quote-copy .support-note {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quote-copy .support-note {
+            max-width: 58rem;
+            font-size: 1.02rem;
+        }
+
         .quote-list {
-            margin: 22px 0 0;
-            padding: 18px 0 0;
+            margin: 28px 0 0;
+            padding: 24px 0 0;
             list-style: none;
             border-top: 1px solid var(--line);
             display: grid;
-            gap: 10px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
         }
 
         .quote-list li {
             color: var(--muted);
             font-size: 0.95rem;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 760px) {
+            .quote-list {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        /* =========================
+   STORY LAYOUT OVERRIDE
+   =========================
+   Keeps the story text and community card from getting squeezed
+   into skinny side-by-side columns on large screens.
+*/
+
+        #story .story-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 36px;
+        }
+
+        #story .copy {
+            max-width: 70rem;
+        }
+
+        #story .quote-block {
+            max-width: 100%;
+        }
+
+        #story .quote-copy strong {
+            max-width: 26ch;
+        }
+
+        #story .quote-copy .support-note {
+            max-width: 62rem;
+        }
+
+        #story .quote-list {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         }
 
         /* =========================
@@ -486,6 +630,31 @@
             height: 100%;
             background: linear-gradient(90deg, #f4f1ea, #ceb897);
             transition: width 0.6s ease;
+        }
+
+        /* =========================
+           VIDEO SECTION
+           ========================= */
+
+        .video-card {
+            width: min(100%, 420px);
+            margin: 0 auto;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.035);
+            overflow: hidden;
+        }
+
+        .video-embed {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: #000;
+        }
+
+        .video-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
         }
 
         /* =========================
@@ -625,6 +794,33 @@
            ========================= */
 
         @media (max-width: 900px) {
+            .countdown-simple {
+                flex-direction: column;
+                gap: 10px;
+                min-height: 0;
+                padding: 20px;
+            }
+
+            .countdown-text {
+                text-align: center;
+            }
+
+            .countdown {
+                grid-template-columns: repeat(2, auto);
+            }
+
+            .countdown-card {
+                min-width: 104px;
+            }
+
+            .hero-progress-row {
+                grid-template-columns: 1fr;
+            }
+
+            .donor-count-display {
+                text-align: left;
+            }
+
             .container {
                 width: 100%;
                 padding-left: 12px;
@@ -791,6 +987,10 @@
 
             goalAmount: 50000,
 
+            showDate: "2026-09-08T00:00:00+02:00",
+            showDateLabel: "WAWE World Championship • Sept 8–13, 2026",
+            showLocation: "Jerez de la Frontera, Spain",
+
             donations: [
                 { date: "2026-05-14", name: "Janai Brown", amount: 100 },
                 { date: "2026-05-14", name: "Thomas Marshall", amount: 100 },
@@ -918,16 +1118,18 @@
             sponsorEmail: "mfrenchy77@gmail.com",
             sponsorshipPhone: "619-408-8954",
 
-            storyIntro: `Matt French and Navarro have been selected to represent the United States at the 2026 Working Equitation World Championship in Jerez, Spain, where the first U.S. team ever will step onto the world stage.
+            storyIntro: `Matt French and Navarro have been selected to represent the United States at the 2026 WAWE World Championship in Jerez de la Frontera, Spain.
 
-Matt is a San Diego-based horse trainer and Masters-level competitor. Navarro, a rescued reservation mustang, is the horse he has developed through years of patience, trust, and hard-earned partnership. Together, they have risen from humble beginnings to become part of a historic moment for American Working Equitation.
+This is a historic moment for American Working Equitation, but for Matt and Navarro, it is also the result of years of ordinary work done with extraordinary patience: daily training, long drives, setbacks, breakthroughs, trust, and partnership.
 
-They are now raising support to help cover the very real costs of international competition, including horse transport, veterinary and quarantine requirements, stabling, rider travel, and on-the-ground logistics in Europe. Every contribution helps make this journey possible.`,
+Navarro is a rescued reservation mustang who came from humble beginnings. Over time, he became far more than a competition horse. He became Matt’s partner, teammate, teacher, and the horse who made this road possible.
 
+Now the challenge is getting them there. International competition with a horse requires major logistics: horse transport, veterinary paperwork, required testing, travel, stabling, feed, bedding, and on-the-ground support in Europe.
+
+What has made this campaign special is that it has not been carried by big corporate sponsors. It has been carried by people. Friends. Family. Students. Clients. Horse people. A community that believes in this horse, this partnership, and this chance to represent Team USA on the world stage.`,
             storyBody: "",
 
-            storyNavarro: "Navarro is more than a competition horse. He is Matt’s partner, teammate, and a huge part of the journey that made this opportunity possible. Every contribution helps this partnership make the trip to Spain and represent the United States.",
-
+            storyNavarro: "Every donation, every share, and every message of encouragement helps move Matt and Navarro one step closer to Spain. This is no longer just a fundraising campaign. It is a community standing behind a horse-and-rider team on the road to the World Championship.",
             budgetItems: [
                 {
                     title: "Horse shipping and international transport",
@@ -963,20 +1165,20 @@ They are now raising support to help cover the very real costs of international 
 
             givingTiers: [
                 {
-                    name: "Fuel the trip",
-                    detail: "$50+ • Helps cover daily travel expenses"
+                    name: "Donate if you can",
+                    detail: "Every contribution helps with the real cost of getting a horse-and-rider team to Spain."
                 },
                 {
-                    name: "Back the team",
-                    detail: "$250+ • Helps with competition costs"
+                    name: "Share the campaign",
+                    detail: "Sharing the website, GoFundMe, or social posts helps the story reach people who may want to support the journey."
                 },
                 {
-                    name: "Sponsor the journey",
-                    detail: "$1,000+ • Big help with major expenses and preparation"
+                    name: "Follow the road to Spain",
+                    detail: "Following on social media helps build momentum as training, travel planning, and championship prep continue."
                 },
                 {
-                    name: "Premier sponsor",
-                    detail: "$5,000+ • Great fit for businesses"
+                    name: "Send encouragement",
+                    detail: "Messages, comments, and support from the horse community mean a lot as the trip gets closer."
                 }
             ]
         };
@@ -988,6 +1190,7 @@ They are now raising support to help cover the very real costs of international 
                 <a class="nav-link" href="#story">Story</a>
                 <a class="nav-link" href="#budget">Budget</a>
                 <a class="nav-link" href="#support">Support</a>
+                <a class="nav-link" href="#video">Video</a>
             </div>
 
             <div class="brand">Matt & Navarro</div>
@@ -1008,7 +1211,33 @@ They are now raising support to help cover the very real costs of international 
                     <div class="hero-topline" id="statusBadge"></div>
                     <h1 class="hero-title" id="heroTitle"></h1>
                     <p class="hero-subtitle" id="heroSubtitle"></p>
+                    <div class="countdown-simple" aria-label="Countdown to the WAWE World Championship">
+                        <span class="countdown-days" id="countdownDays">0</span>
+                        <span class="countdown-text">Days until World Championship</span>
+                    </div>
 
+                    <div class="countdown-note">
+                        <span id="showDateLabel"></span> • <span id="showLocation"></span>
+                    </div>
+                    <div class="progress-wrap hero-progress">
+                        <div class="hero-progress-row">
+                            <div>
+                                <p class="progress-amount" id="amountRaised">$0</p>
+                                <div class="progress-caption" id="goalAmountText">Raised toward $50,000 goal</div>
+                            </div>
+
+                            <div class="donor-count-display">
+                                <span class="donor-count-number" id="donorCount">0</span>
+                                <span class="donor-count-label">Community donors</span>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar" aria-label="Fundraising progress">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+
+                        <div class="list-note" id="progressPercent">0% funded</div>
+                    </div>
                     <div class="hero-actions" id="donate">
                         <a class="button button-primary" id="venmoButton" href="#" target="_blank"
                             rel="noreferrer">Contribute on Venmo</a>
@@ -1060,43 +1289,44 @@ They are now raising support to help cover the very real costs of international 
             </div>
         </section>
 
+
         <section class="section" id="story">
             <div class="container section-inner">
                 <div class="section-head">
                     <div>
                         <div class="section-label">The story</div>
-                        <h2 class="section-title">Selected for a historic first</h2>
-                    </div>
-                    <p class="section-intro">
-                        Matt French and Navarro are heading to Spain to represent Team USA in Working Equitation. This
-                        campaign helps make that trip possible.
-                    </p>
-                </div>
-
-                <div class="story-grid">
-                    <div class="copy">
-                        <p id="storyIntro"></p>
-                        <p id="storyBody"></p>
-                        <p id="storyNavarro"></p>
+                        <h2 class="section-title">A community driven road to Spain</h2>
+                        <p class="section-intro">
+                            Matt French and Navarro are heading to Jerez to represent Team USA in Working Equitation.
+                            This campaign is being carried by friends, family, and the horse
+                            community.
+                        </p>
                     </div>
 
-                    <div class="quote-block">
-                        <div class="quote-copy">
-                            <strong>Representing Team USA takes a village.</strong>
-                            <div class="support-note">
-                                Every donation, share, and sponsorship helps Matt and Navarro make the trip to Spain and
-                                compete on the world stage.
+                    <div class="story-grid">
+                        <div class="copy">
+                            <p id="storyIntro"></p>
+                            <p id="storyBody"></p>
+                            <p id="storyNavarro"></p>
+                        </div>
+
+                        <div class="quote-block">
+                            <div class="quote-copy">
+                                <strong>This journey is being driven by a village.</strong>
+                                <div class="support-note">
+                                    Every donation, share, message, and bit of encouragement helps Matt and Navarro make
+                                    the trip to Spain and compete on the world stage.
+                                </div>
+
+                                <ul class="quote-list">
+                                    <li>First U.S. team to compete at the Working Equitation World Championship</li>
+                                    <li>San Diego-based horse-and-rider team</li>
+                                    <li>Supporting international transport, horse care, and travel logistics</li>
+                                </ul>
                             </div>
-
-                            <ul class="quote-list">
-                                <li>First U.S. team to compete at the Working Equitation World Championship</li>
-                                <li>San Diego-based horse-and-rider team</li>
-                                <li>Supporting international transport, horse care, and travel logistics</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <section class="section" id="budget">
@@ -1112,23 +1342,9 @@ They are now raising support to help cover the very real costs of international 
                     </p>
                 </div>
 
-                <div class="budget-grid">
+                <div class="budget-grid budget-grid-single">
                     <div>
                         <ul class="budget-list" id="budgetList"></ul>
-                    </div>
-
-                    <div class="progress-wrap">
-                        <!--
-                            This amount is filled in automatically from campaign.donations.
-                            Do not manually edit the dollar amount here.
-                        -->
-                        <p class="progress-amount" id="amountRaised">$0</p>
-
-                        <div class="progress-caption" id="goalAmountText">Raised toward $50,000 goal</div>
-                        <div class="progress-bar" aria-label="Fundraising progress">
-                            <div class="progress-fill" id="progressFill"></div>
-                        </div>
-                        <div class="list-note" id="progressPercent">0% funded</div>
                     </div>
                 </div>
             </div>
@@ -1142,8 +1358,9 @@ They are now raising support to help cover the very real costs of international 
                         <h2 class="section-title">Supporters making this possible.</h2>
                     </div>
                     <p class="section-intro">
-                        Every donation, share, and sponsorship helps Matt and Navarro get one step closer to Spain.
-                        Thank you to the people helping make this possible.
+                        This campaign has been carried by friends, family and the horse community.
+                        Every donation, share, message, and bit of encouragement helps Matt and Navarro get one step
+                        closer to Spain.
                     </p>
                 </div>
 
@@ -1173,36 +1390,58 @@ They are now raising support to help cover the very real costs of international 
                 <div class="section-head">
                     <div>
                         <div class="section-label">Contact</div>
-                        <h2 class="section-title">Sponsorships and larger support.</h2>
-                    </div>
-                    <p class="section-intro">
-                        For sponsorships, media inquiries, or larger contributions, reach out directly using the contact
-                        options below.
-                    </p>
-                </div>
-
-                <div class="contact-grid">
-                    <div>
-                        <div class="contact-copy">
-                            Use the buttons below for sponsor inquiries, media requests, or direct support
-                            conversations.
-                        </div>
-                        <div class="contact-actions">
-                            <a class="button button-primary" id="emailLink" href="#">Email Matt</a>
-                            <a class="button button-secondary" id="phoneLink" href="#">Text Matt</a>
-                        </div>
+                        <h2 class="section-title">Want to help or connect?</h2>
+                        <p class="section-intro">
+                            For questions, media inquiries, community support, or help connecting Matt and Navarro with
+                            people who may want to follow the journey, reach out directly.
+                        </p>
                     </div>
 
-                    <div>
-                        <ol class="checklist">
-                            <li>Donate through GoFundMe or Venmo</li>
-                            <li>Share the campaign with friends, clients, and horse lovers</li>
-                            <li>Connect Matt with businesses interested in sponsorship</li>
-                            <li>Help spread the word about Team USA’s trip to Spain</li>
-                        </ol>
+                    <div class="contact-grid">
+                        <div>
+                            <div class="contact-copy">
+                                Have a question, want to help, or know someone who should hear about the campaign?
+                                Use the buttons below to reach out directly.
+                            </div>
+                            <div class="contact-actions">
+                                <a class="button button-primary" id="emailLink" href="#">Email Matt</a>
+                                <a class="button button-secondary" id="phoneLink" href="#">Text Matt</a>
+                            </div>
+                        </div>
+                        <section class="section" id="video">
+                            <div class="container section-inner">
+                                <div class="section-head">
+                                    <div>
+                                        <div class="section-label">Videos</div>
+                                        <h2 class="section-title">We're Going to Spain.</h2>
+                                    </div>
+                                    <p class="section-intro">
+                                        Breaking to news to Navi!
+                                    </p>
+                                </div>
+
+                                <div class="video-card">
+                                    <div class="video-embed">
+                                        <iframe src="https://www.youtube.com/embed/yYHxYO9Kl10"
+                                            title="Matt and Navarro Road to Spain"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div>
+                            <ol class="checklist">
+                                <li>Donate through GoFundMe or Venmo</li>
+                                <li>Share the campaign with friends, clients, barn families, and horse lovers</li>
+                                <li>Send a note of encouragement as the trip gets closer</li>
+                                <li>Help spread the word about Matt and Navarro’s road to Spain</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
 
@@ -1410,6 +1649,33 @@ They are now raising support to help cover the very real costs of international 
                 return total + donation.amount;
             }, 0);
         }
+        function getDonorCount() {
+            /*
+                Counts grouped donors, not raw donation rows.
+
+                Repeat donors count once.
+                Anonymous donations remain separate because they may be different people.
+            */
+            return getGroupedDonations().length;
+        }
+
+        function updateCountdown() {
+            /*
+                Calculates the number of days until the WAWE World Championship.
+
+                The target date lives in campaign.showDate.
+                Change that one value if the championship date ever changes.
+            */
+            const targetTime = new Date(campaign.showDate).getTime();
+            const now = Date.now();
+            const distance = targetTime - now;
+
+            const daysRemaining = distance > 0
+                ? Math.ceil(distance / (1000 * 60 * 60 * 24))
+                : 0;
+
+            document.getElementById("countdownDays").textContent = daysRemaining;
+        }
 
         function renderCampaign() {
             const amountRaised = getTotalRaised();
@@ -1419,7 +1685,11 @@ They are now raising support to help cover the very real costs of international 
             document.getElementById("statusBadge").textContent = campaign.statusBadge;
             document.getElementById("heroTitle").innerHTML = campaign.headlineLines.join("<br>");
             document.getElementById("heroSubtitle").textContent = campaign.subtitle;
+            document.getElementById("showDateLabel").textContent = campaign.showDateLabel;
+            document.getElementById("showLocation").textContent = campaign.showLocation;
+            updateCountdown();
             document.getElementById("heroGoal").textContent = formatCurrency(campaign.goalAmount) + " fundraising goal";
+
 
             document.getElementById("storyIntro").textContent = campaign.storyIntro;
             document.getElementById("storyBody").textContent = campaign.storyBody || "";
@@ -1455,6 +1725,7 @@ They are now raising support to help cover the very real costs of international 
             document.getElementById("progressFill").style.width = visiblePct + "%";
             document.getElementById("progressPercent").textContent =
                 pct > 0 && pct < 1 ? "<1% funded" : Math.round(pct) + "% funded";
+            document.getElementById("donorCount").textContent = getDonorCount();
 
             /*
                 Budget list.
@@ -1533,8 +1804,8 @@ They are now raising support to help cover the very real costs of international 
 
             document.getElementById("year").textContent = new Date().getFullYear();
         }
-
         renderCampaign();
+        setInterval(updateCountdown, 60 * 1000);
     </script>
 </body>
 
