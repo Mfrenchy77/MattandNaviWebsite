@@ -501,6 +501,14 @@
            To add, remove, or edit donations, change the campaign.donations
            list near the top of the body.
         */
+        /* =========================
+           DONATION WALL
+           =========================
+           This is the public list of donations.
+
+           It groups repeat donors together, adds their donations,
+           and shows their donation dates underneath their name.
+        */
 
         .donation-list {
             list-style: none;
@@ -511,33 +519,41 @@
 
         .donation-item {
             display: grid;
-            grid-template-columns: 110px minmax(0, 1fr) auto;
-            gap: 16px;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 8px 18px;
             align-items: baseline;
-            padding: 14px 0;
+            padding: 16px 0;
             border-bottom: 1px solid var(--line);
         }
 
         .donation-item-featured {
-            padding: 16px;
+            padding: 18px;
             margin: 10px 0;
             border: 1px solid rgba(244, 241, 234, 0.28);
             background: rgba(255, 255, 255, 0.045);
         }
 
-        .donation-date {
-            color: var(--muted);
-            font-size: 0.86rem;
-            white-space: nowrap;
-        }
-
         .donation-name {
             font-weight: 800;
+            min-width: 0;
         }
 
         .donation-amount {
             font-weight: 800;
             white-space: nowrap;
+            text-align: right;
+        }
+
+        .donation-date {
+            grid-column: 1 / -1;
+            color: var(--muted);
+            font-size: 0.86rem;
+            line-height: 1.35;
+        }
+
+        .donation-count {
+            color: var(--text);
+            font-weight: 700;
         }
 
         /* =========================
@@ -885,10 +901,10 @@
                 { date: "2026-07-13", name: "James French", amount: 1369 },
                 { date: "2026-07-13", name: "Phyllis Laderman", amount: 250 },
                 { date: "2026-07-13", name: "Judy Fritz", amount: 500 },
-                { date: "2026-06-16", name: "Margit Deerman", amount: 200 },
-                { date: "2026-06-17", name: "Don and Julia Wendt", amount: 500 },
-                { date: "2026-06-17", name: "Maury Freitas", amount: 400 },
-                { date: "2026-06-17", name: "Corinne Daniel", amount: 600 }
+                { date: "2026-07-16", name: "Margit Deerman", amount: 200 },
+                { date: "2026-07-17", name: "Don and Julia Wendt", amount: 500 },
+                { date: "2026-07-17", name: "Maury Freitas", amount: 400 },
+                { date: "2026-07-17", name: "Corinne Daniel", amount: 600 }
 
 
             ],
@@ -1307,10 +1323,10 @@ They are now raising support to help cover the very real costs of international 
 
         function getGroupedDonations() {
             /*
-                This keeps campaign.donations as the full donation history,
+                Keeps campaign.donations as the full donation history,
                 but groups matching donor names for the public donor wall.
 
-                The site total still uses every individual donation.
+                This means repeat donors appear once with a combined total.
             */
             const groups = new Map();
 
@@ -1322,43 +1338,65 @@ They are now raising support to help cover the very real costs of international 
                     groups.set(key, {
                         name: cleanedName,
                         amount: 0,
-                        dates: [],
-                        donationCount: 0
+                        donations: []
                     });
                 }
 
                 const group = groups.get(key);
+
                 group.amount += donation.amount;
-                group.dates.push(donation.date);
-                group.donationCount += 1;
+                group.donations.push({
+                    date: donation.date,
+                    amount: donation.amount
+                });
             });
 
             return Array.from(groups.values()).map(function (group) {
-                const uniqueDates = Array.from(new Set(group.dates)).sort();
+                group.donations.sort(function (a, b) {
+                    return new Date(a.date) - new Date(b.date);
+                });
 
-                return {
-                    name: group.name,
-                    amount: group.amount,
-                    dates: uniqueDates,
-                    donationCount: group.donationCount
-                };
+                return group;
             });
         }
 
-        function formatDonationDateSummary(dates) {
+        function formatDonationDateSummary(donations) {
             /*
-                If someone donated once, show that date.
-                If someone donated more than once, show the first date + how many more.
+                Shows dates clearly.
+
+                Examples:
+                One donation:
+                6/17/2026
+
+                Two donations on same date:
+                6/17/2026 × 2 donations
+
+                Donations on different dates:
+                5/22/2026, 6/17/2026
             */
-            if (!dates || dates.length === 0) {
-                return "";
-            }
+            const dateCounts = new Map();
 
-            if (dates.length === 1) {
-                return formatDisplayDate(dates[0]);
-            }
+            donations.forEach(function (donation) {
+                if (!dateCounts.has(donation.date)) {
+                    dateCounts.set(donation.date, 0);
+                }
 
-            return formatDisplayDate(dates[0]) + " + " + (dates.length - 1) + " more";
+                dateCounts.set(donation.date, dateCounts.get(donation.date) + 1);
+            });
+
+            const dateParts = Array.from(dateCounts.entries()).map(function ([date, count]) {
+                const displayDate = formatDisplayDate(date);
+
+                if (count > 1) {
+                    return displayDate + " × " + count;
+                }
+
+                return displayDate;
+            });
+
+            const donationWord = donations.length === 1 ? "donation" : "donations";
+
+            return dateParts.join(", ") + " • <span class=\"donation-count\">" + donations.length + " " + donationWord + "</span>";
         }
 
         function getTotalRaised() {
@@ -1454,10 +1492,10 @@ They are now raising support to help cover the very real costs of international 
                         return b.amount - a.amount;
                     }
 
-                    const aLatestDate = a.dates[a.dates.length - 1];
-                    const bLatestDate = b.dates[b.dates.length - 1];
+                    const aLatestDonation = a.donations[a.donations.length - 1];
+                    const bLatestDonation = b.donations[b.donations.length - 1];
 
-                    return new Date(bLatestDate) - new Date(aLatestDate);
+                    return new Date(bLatestDonation.date) - new Date(aLatestDonation.date);
                 });
 
             document.getElementById("donationList").innerHTML = publicDonations.map(function (donation) {
@@ -1465,15 +1503,14 @@ They are now raising support to help cover the very real costs of international 
 
                 return '<li class="donation-item'
                     + featuredClass
-                    + '"><div class="donation-date">'
-                    + formatDonationDateSummary(donation.dates)
-                    + '</div><div class="donation-name">'
+                    + '"><div class="donation-name">'
                     + donation.name
                     + '</div><div class="donation-amount">'
                     + formatCurrency(donation.amount)
+                    + '</div><div class="donation-date">'
+                    + formatDonationDateSummary(donation.donations)
                     + '</div></li>';
             }).join("");
-
             /*
                 Giving tiers.
             */
